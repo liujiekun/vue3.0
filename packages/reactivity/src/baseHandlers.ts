@@ -67,7 +67,7 @@ function createGetter(isReadonly = false, shallow = false) {
         return res.value
       }
     }
-
+    // track收集依赖
     !isReadonly && track(target, TrackOpTypes.GET, key)
     return isObject(res)
       ? isReadonly
@@ -104,6 +104,7 @@ function createSetter(shallow = false) {
     const result = Reflect.set(target, key, value, receiver)
     // don't trigger if target is something up in the prototype chain of original
     if (target === toRaw(receiver)) {
+      // trigger通知依赖进行更新
       if (!hadKey) {
         trigger(target, TriggerOpTypes.ADD, key, value)
       } else if (hasChanged(value, oldValue)) {
