@@ -69,6 +69,7 @@ function compileToFunction(
   return (compileCache[key] = render)
 }
 
+// 只是将runtime模块中的compile赋值为compileToFunction
 registerRuntimeCompiler(compileToFunction)
 
 export { compileToFunction as compile }

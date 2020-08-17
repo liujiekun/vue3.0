@@ -52,7 +52,7 @@ export const render = ((...args) => {
 export const hydrate = ((...args) => {
   ensureHydrationRenderer().hydrate(...args)
 }) as RootHydrateFunction
-
+// 正常createApp
 export const createApp = ((...args) => {
   const app = ensureRenderer().createApp(...args)
 
@@ -78,6 +78,7 @@ export const createApp = ((...args) => {
   return app
 }) as CreateAppFunction<Element>
 
+// 服务端createApp
 export const createSSRApp = ((...args) => {
   const app = ensureHydrationRenderer().createApp(...args)
 
